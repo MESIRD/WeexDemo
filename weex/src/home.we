@@ -1,0 +1,103 @@
+<template>
+	<container class="container">
+		<list class="list">
+			<cell class="cell" onclick="oncellclick" rownumber={{id}} repeat="{{blogList}}" append="tree">
+				<div class="blogDiv">
+					<text class="blogTitle">{{title}}</text>
+					<text class="blogTime">{{time}}</text>
+					<div class="blank"></div>
+					<div class="separator"></div>
+					<div class="blank"></div>
+				</div>
+			</cell>
+		</list>
+	</container>
+</template>
+
+<style>
+	.container {
+		padding-top: 30;
+		background-color: #F3F4F5;
+	}
+	.blogTitle {
+		padding-left: 30;
+		color: #373737; 
+		font-size: 36;
+		font-weight: bold;
+	}
+
+	.blogTime {
+		padding-left: 30;
+		color: #AFAFAF;
+		font-size: 24;
+	}
+
+	.blank {
+		height: 20;
+	}
+
+	.separator {
+		height: 1;
+		background-color: #E7E7E7;
+	}
+</style>
+
+<script>
+	module.exports = {
+		data: {
+			blogList: [
+				{
+					id:1,
+					title:"UITableView overview",
+					time:"23 Oct 2016",
+					url:"http://mesird.com/2016/10/23/UITableView-overview/"
+				},
+				{
+					id:2,
+					title:"iOS debugging techs",
+					time:"23 Aug 2016",
+					url:"http://mesird.com/2016/08/23/iOS-debugging-techs/"
+				},
+				{
+					id:3,
+					title:"Get crash logs on mobile device",
+					time:"18 Aug 2016",
+					url:"http://mesird.com/2016/08/18/get-crash-logs-on-mobile-device/"
+				},
+				{
+					id:4,
+					title:"Git Basic Usage",
+					time:"10 Aug 2016",
+					url:"http://mesird.com/2016/08/10/git-basic-usage/"
+				},
+				{
+					id:5,
+					title:"JSPatch simple usage",
+					time:"11 Jul 2016",
+					url:"http://mesird.com/2016/07/11/JSPatch-simple-usage/"
+				}
+			],
+		},
+		methods: {
+			oncellclick: function(e) {
+				console.log("CLICKED!!!");
+
+				var params = {
+					'url' : 'detail.js',
+					'animated' : 'true',
+				}
+
+				var navigator = require('@weex-module/navigator');
+
+				navigator.push(params, function(e){
+					// callback
+				});
+
+				// this.$call('modal', 'toast', {
+				// 	'message': 'row ' + e.target.attr.rownumber + ' clicked',
+				// 	'duration': 2.0
+				// });
+			}
+		}
+	}
+</script>
